@@ -155,7 +155,7 @@
     old: 210000,
     stock: 5
   }
-];
+  ];
 
   function rupiah(n){
     return new Intl.NumberFormat("id-ID").format(n);
@@ -173,17 +173,18 @@
     const filtered = products.filter(p => p.name.toLowerCase().includes(q));
 
     filtered.forEach((p, idx) => {
-      const msg =
-`Halo Admin, saya mau order:
-- Produk: ${p.baju dan celana}
-- Harga: Rp${90.000(p.price)}
+      
+const msg = `
+Halo Admin, saya mau order:
+- Produk: ${p.name}
+- Harga: Rp${rupiah(p.price)}
 - Jumlah: 1
 - Nama:
 - Alamat:
 - Metode bayar: Transfer/COD
 
-Terima kasih.`;
-
+Terima kasih.
+`;
       const el = document.createElement("div");
       el.className = "card";
       el.innerHTML = `
