@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Toko Online</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial, Helvetica, sans-serif;background:#f5f6f8;color:#222}
+    header{background:#111;color:#fff;padding:18px 16px}
+    .wrap{max-width:980px;margin:0 auto;padding:0 16px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{width:36px;height:36px;border-radius:10px;background:#fff;color:#111;display:grid;place-items:center;font-weight:700}
+    .sub{opacity:.8;font-size:13px;margin-top:4px}
+    .hero{padding:22px 0}
+    .card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 22px rgba(0,0,0,.06)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media(max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+    .pimg{height:140px;border-radius:14px;background:linear-gradient(135deg,#e6e9ff,#fff0f6);display:grid;place-items:center;font-size:38px}
+    .ptitle{font-weight:700;margin:10px 0 6px}
+    .price{font-weight:700}
+    .old{opacity:.6;text-decoration:line-through;margin-left:8px;font-weight:400}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button,a.btn{
+      border:0;border-radius:12px;padding:11px 14px;cursor:pointer;font-weight:700;
+      text-decoration:none;display:inline-flex;align-items:center;gap:8px
+    }
+    .primary{background:#25D366;color:#fff}
+    .secondary{background:#111;color:#fff}
+    .ghost{background:#f1f2f6}
+    .badge{display:inline-block;background:#fff3cd;color:#8a6d3b;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700}
+    .section{margin-top:14px}
+    .flex{display:flex;gap:12px;flex-wrap:wrap}
+    .small{font-size:13px;opacity:.85;line-height:1.45}
+    footer{padding:18px 0;color:#666;font-size:13px}
+    .note{padding:12px;border-radius:14px;background:#eef6ff}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    input{padding:10px 12px;border-radius:12px;border:1px solid #e6e6e6;width:260px;max-width:100%}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topbar">
+    <div>
+      <div class="brand">
+        <div class="logo">TO</div>
+        <div>
+          <div style="font-weight:800;font-size:18px">Toko Online Kamu</div>
+          <div class="sub">Order cepat via WhatsApp • Bisa COD (opsional)</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <input id="search" placeholder="Cari produk..." oninput="render()">
+    </div>
+  </div>
+</header>
+
+<main class="wrap hero">
+  <div class="card">
+    <div class="flex" style="align-items:center;justify-content:space-between">
+      <div>
+        <span class="badge">PROMO HARI INI</span>
+        <h1 style="margin:10px 0 6px">Produk best seller, harga aman</h1>
+        <div class="small">Klik produk → otomatis bikin format chat WhatsApp. Tinggal kirim.</div>
+      </div>
+      <a class="btn secondary" href="#produk">Lihat Produk ↓</a>
+    </div>
+
+    <div class="section note">
+      <div style="font-weight:800;margin-bottom:6px">Info Pembayaran</div>
+      <div class="small">
+        Rekening: <b id="rek">BCA 1234567890 a/n TOKO KAMU</b>
+      </div>
+      <div class="btnrow">
+        <button class="ghost" onclick="copyRek()">Copy Rekening</button>
+        <a class="btn primary" id="waBtn" target="_blank" rel="noopener">Chat Admin WhatsApp</a>
+      </div>
+      <div class="small" id="copystatus" style="margin-top:8px"></div>
+    </div>
+
+    <h2 id="produk" style="margin:18px 0 10px">Daftar Produk</h2>
+    <div class="grid" id="list"></div>
+
+    <h2 style="margin:18px 0 10px">Testimoni</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="small">“Barangnya sesuai, pengiriman cepat. Recomended!”</div>
+        <div style="margin-top:8px;font-weight:700">— Rina</div>
+      </div>
+      <div class="card">
+        <div class="small">“Admin ramah banget, respon cepat.”</div>
+        <div style="margin-top:8px;font-weight:700">— Dimas</div>
+      </div>
+      <div class="card">
+        <div class="small">“Packaging aman, produk ori.”</div>
+        <div style="margin-top:8px;font-weight:700">— Sari</div>
+      </div>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> Toko Online Kamu • Dibuat dengan GitHub Pages</div>
+    </footer>
+  </div>
+</main>
+
+<script>
+  // =========================
+  // 1) GANTI NOMOR WA DI SINI
+  // =========================
+  const WA_NUMBER = "6285887443293"; // contoh: 62812xxxx (pakai kode negara 62)
+
+  // =========================
+  // 2) EDIT PRODUK DI SINI
+  // =========================
+  const products = [
+    { emoji:"🧴", name:"Skincare Glow", price:89000, old:129000, stock:12 },
+    { emoji:"👕", name:"Kaos Premium", price:75000, old:99000, stock:8 },
+    { emoji:"🎧", name:"Headset Bass", price:165000, old:210000, stock:5 },
+    { emoji:"🕶️", name:"Kacamata Stylish", price:65000, old:85000, stock:10 },
+    { emoji:"⌚", name:"Jam Casual", price:120000, old:150000, stock:6 },
+    { emoji:"👜", name:"Tas Wanita", price:99000, old:130000, stock:7 },
+  ];
+
+  function rupiah(n){
+    return new Intl.NumberFormat("id-ID").format(n);
+  }
+
+  function waLink(text){
+    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+  }
+
+  function render(){
+    const q = (document.getElementById("search").value || "").toLowerCase();
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    const filtered = products.filter(p => p.name.toLowerCase().includes(q));
+
+    filtered.forEach((p, idx) => {
+      const msg =
+`Halo Admin, saya mau order:
+- Produk: ${p.baju dan celana}
+- Harga: Rp${90.000(p.price)}
+- Jumlah: 1
+- Nama:
+- Alamat:
+- Metode bayar: Transfer/COD
+
+Terima kasih.`;
+
+      const el = document.createElement("div");
+      el.className = "card";
+      el.innerHTML = `
+        <div class="pimg">${p.emoji}</div>
+        <div class="ptitle">${p.name}</div>
+        <div class="small">Stok: <b>${p.stock}</b></div>
+        <div style="margin-top:8px">
+          <span class="price">Rp${rupiah(p.price)}</span>
+          <span class="old">Rp${rupiah(p.old)}</span>
+        </div>
+        <div class="btnrow">
+          <a class="btn primary" href="${waLink(msg)}" target="_blank" rel="noopener">Order via WA</a>
+          <button class="ghost" onclick="alert('Simpan dulu ya: ${p.name}')">Simpan</button>
+        </div>
+      `;
+      list.appendChild(el);
+    });
+
+    if(filtered.length === 0){
+      list.innerHTML = `<div class="small">Produk tidak ditemukan.</div>`;
+    }
+  }
+
+  function copyRek(){
+    const text = document.getElementById("rek").innerText;
+    navigator.clipboard.writeText(text).then(()=>{
+      document.getElementById("copystatus").innerText = "✅ Rekening berhasil dicopy.";
+      setTimeout(()=>document.getElementById("copystatus").innerText="", 2000);
+    }).catch(()=>{
+      document.getElementById("copystatus").innerText = "⚠️ Gagal copy. Tekan dan tahan untuk salin manual.";
+    });
+  }
+
+  // tombol chat admin
+  document.getElementById("waBtn").href = waLink("Halo Admin, saya mau tanya produk.");
+  document.getElementById("year").innerText = new Date().getFullYear();
+
+  render();
+</script>
+
+</body>
+</html>
