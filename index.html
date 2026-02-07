@@ -237,6 +237,36 @@
     document.getElementById("search").addEventListener("input", renderProducts);
 
     renderProducts();
+    document.getElementById("yearFooter").innerText = new Date().getFullYear();
+document.getElementById("waFooter").href =
+  waLink("Halo Admin Toko Online Lilahsan, saya mau tanya produk.");
   </script>
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div>
+        <h3>Toko Online Lilahsan</h3>
+        <p>Alamat:<br>
+          Jl. benda raya No. 11823<br>
+          dki jakarta, kec.kalideres kel.kamal
+        </p>
+      </div>
+
+      <div>
+        <h3>Kontak</h3>
+        <p>
+          WhatsApp:
+          <a id="waFooter" target="_blank" rel="noopener">
+            0858-5874-43293
+          </a>
+          <br>
+          Email: sandihermasnyah816@gmail.com
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      © <span id="yearFooter"></span> Toko Online Lilahsan
+    </div>
+  </footer>
 </body>
 </html>
