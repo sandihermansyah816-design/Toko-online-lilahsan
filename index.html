@@ -150,6 +150,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 /* Supaya footer tidak ketutup tombol WA floating */
 body{ padding-bottom: 96px; }
+      /* ===== Tentang Kami ===== */
+.about {
+  margin-top: 48px;
+  padding: 24px 18px;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+.about h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  letter-spacing: .5px;
+}
+
+.about p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
   </style>
 </head>
 
@@ -173,6 +194,47 @@ body{ padding-bottom: 96px; }
     </header>
 
     <div id="product-list" class="grid"></div>
+    <section class="about">
+  <h2>Tentang Kami</h2>
+  <p>
+    <strong>Toko Online Lilahsan</strong> adalah toko online yang menyediakan berbagai produk pilihan
+    dengan kualitas terbaik dan harga terjangkau.
+  </p>
+  <p>
+    Kami melayani pemesanan via WhatsApp dengan respon cepat,
+    pengiriman terpercaya, dan pelayanan yang ramah.
+  </p>
+</section>
+    <section class="howto">
+  <h2>Cara Order</h2>
+
+  <div class="howto-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Pilih produk yang kamu mau.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Klik tombol <b>Order via WhatsApp</b> untuk lanjut ke chat WhatsApp.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Tulis alamat & jumlah pesanan, lalu kirim.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">Admin konfirmasi stok, ongkir, dan total bayar.</div>
+    </div>
+  </div>
+
+  <div class="howto-note">
+    <i class="fa-solid fa-circle-info"></i>
+    Tips: Pastikan nomor WhatsApp aktif & alamat lengkap biar cepat diproses.
+  </div>
+</section>
   </div>
 
   <a id="waAdminFloat" class="floating-wa" target="_blank" rel="noopener" aria-label="WhatsApp Admin">🟢</a>
@@ -189,12 +251,25 @@ body{ padding-bottom: 96px; }
     //    /img/produk1.jpg, dst
     // =========================
     const products = [
-      { img: "img/produk1.jpg", name: "pocong premium" },
-      { img: "img/produk2.jpg", name: "kaka" },
-      { img: "img/produk3.jpg", name: "nailong lucu" },
-      // tambah produk di sini:
-      // { img: "img/produk4.jpg", name: "nama produk" },
-    ];
+  {
+    img: "img/produk1.jpg",
+    name: "Pocong Premium",
+    price: 25000,
+    badge: "Best Seller"
+  },
+  {
+    img: "img/produk2.jpg",
+    name: "Kaka",
+    price: 20000,
+    badge: "Promo"
+  },
+  {
+    img: "img/produk3.jpg",
+    name: "Nailong Lucu",
+    price: 30000,
+    badge: "Ready"
+  },
+];
 
     // =========================
     // UTIL
@@ -257,7 +332,27 @@ body{ padding-bottom: 96px; }
 
         const card = document.createElement("div");
         card.className = "card";
-        card.innerHTML = `
+        const price = p.price ? `Rp ${(p.price.toLocaleString("id-ID")}` : "";
+const badge = p.badge ? `<span class="badge">${escapeHtml(p.badge)}</span>` : "";
+
+card.innerHTML = `
+  <div class="thumb">
+    ${badge}
+    ${
+      img
+        ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}">`
+        : `<div class="small">Tidak ada foto</div>`
+    }
+  </div>
+
+  <div class="content">
+    <div class="title">${escapeHtml(name)}</div>
+    <div class="price">${price}</div>
+    <a class="btn" href="${waLink(msg)}" target="_blank" rel="noopener">
+      Order via WhatsApp
+    </a>
+  </div>
+`;
           <div class="thumb">
             ${img
               ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" loading="lazy">`
