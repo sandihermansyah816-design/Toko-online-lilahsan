@@ -144,10 +144,8 @@ const products = [
     name: "nailong lucu"
   }
 ];
-
 const container = document.getElementById("product-list");
 container.innerHTML = "";
-
 products.forEach(product => {
   container.innerHTML += `
     <div style="margin:20px; text-align:center;">
@@ -159,9 +157,11 @@ products.forEach(product => {
   function rupiah(n){
     return new Intl.NumberFormat("id-ID").format(n);
   }
+  document.body.insertAdjacentHTML(
+  "beforeend",
+  "<p style='color:green;font-weight:bold'>SCRIPT JALAN</p>"
+);
 </script>
-  
-
   function waLink(text){
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
   }
