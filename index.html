@@ -120,7 +120,7 @@
     </footer>
   </div>
 </main>
-
+<div id="product-list"></div>
 <script>
   // =========================
   // 1) GANTI NOMOR WA DI SINI
@@ -156,7 +156,18 @@
     stock: 5
   }
   ];
+  const container = document.getElementById("product-list");
 
+  products.forEach(product => {
+    container.innerHTML += `
+      <div>
+        <img src="${product.img}" width="150"><br>
+        <b>${product.name}</b><br>
+        Rp ${product.price}
+      </div>
+    `;
+  });
+</script>
   function rupiah(n){
     return new Intl.NumberFormat("id-ID").format(n);
   }
