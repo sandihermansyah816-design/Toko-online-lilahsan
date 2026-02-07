@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="id">
 <head>
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Toko Online lilahsan</title>
@@ -96,7 +98,58 @@
       font-size:24px;
       box-shadow:0 10px 30px rgba(0,0,0,.35);
       z-index:9999;
-    }
+    /* ===== FOOTER (LEBIH RAPI & PROFESIONAL) ===== */
+.footer{
+  margin-top: 44px;
+  border-top: 1px solid var(--line);
+  background: #0f0f12;
+}
+
+.footer-wrap{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 22px 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.footer h3{
+  margin: 0 0 10px;
+  font-size: 15px;
+  letter-spacing: .2px;
+}
+
+.footer p{
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+.footer a{
+  color: #7cf0c2;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(124,240,194,.45);
+  padding-bottom: 1px;
+}
+.footer a:hover{
+  border-bottom-style: solid;
+}
+
+/* baris copyright */
+.footer-copy{
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 12px 18px;
+  border-top: 1px solid var(--line);
+}
+
+/* Supaya footer tidak ketutup tombol WA floating */
+body{ padding-bottom: 96px; }
   </style>
 </head>
 
@@ -250,18 +303,24 @@ document.getElementById("waFooter").href =
           dki jakarta, kec.kalideres kel.kamal
         </p>
       </div>
+<div>
+  <h3>Kontak</h3>
 
-      <div>
-        <h3>Kontak</h3>
-        <p>
-          WhatsApp:
-          <a id="waFooter" target="_blank" rel="noopener">
-            0858-5874-43293
-          </a>
-          <br>
-          Email: sandihermasnyah816@gmail.com
-        </p>
-      </div>
+  <p class="footer-contact">
+    <i class="fa-brands fa-whatsapp"></i>
+    <a id="waFooter" target="_blank" rel="noopener">
+      0858-5874-43293
+    </a>
+  </p>
+
+  <p class="footer-contact">
+    <i class="fa-solid fa-envelope"></i>
+    <a href="mailto:sandihermasnyah816@gmail.com">
+      sandihermasnyah816@gmail.com
+    </a>
+  </p>
+</div>
+      
     </div>
 
     <div class="footer-copy">
