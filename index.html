@@ -331,9 +331,13 @@ body{ padding-bottom: 96px; }
         const msg = orderMessage(name);
 
         const card = document.createElement("div");
-        card.className = "card";
-        const price = p.price ? `Rp ${(p.price.toLocaleString("id-ID")}` : "";
-const badge = p.badge ? `<span class="badge">${escapeHtml(p.badge)}</span>` : "";
+card.className = "card";
+
+const price = (p?.price !== undefined && p?.price !== null)
+  ? `Rp ${Number(p.price).toLocaleString("id-ID")}`
+  : "";
+
+const badge = p?.badge ? `<span class="badge">${escapeHtml(p.badge)}</span>` : "";
 
 card.innerHTML = `
   <div class="thumb">
@@ -353,7 +357,6 @@ card.innerHTML = `
     </a>
   </div>
 `;
-
         frag.appendChild(card);
       });
 
