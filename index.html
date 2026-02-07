@@ -1,209 +1,237 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Toko lilahsan</title>
-  <style>.floating-wa{
-  position:fixed;
-  right:16px;
-  bottom:16px;
-  z-index:9999;
-  background:#25D366;
-  color:#fff;
-  padding:12px 14px;
-  border-radius:999px;
-  font-weight:800;
-  box-shadow:0 10px 22px rgba(0,0,0,.18);
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.floating-wa small{font-weight:700;opacity:.95}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Arial, Helvetica, sans-serif;background:#f5f6f8;color:#222}
-    header{background:#111;color:#fff;padding:18px 16px}
-    .wrap{max-width:980px;margin:0 auto;padding:0 16px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .logo{width:36px;height:36px;border-radius:10px;background:#fff;color:#111;display:grid;place-items:center;font-weight:700}
-    .sub{opacity:.8;font-size:13px;margin-top:4px}
-    .hero{padding:22px 0}
-    .card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 22px rgba(0,0,0,.06)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    @media(max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:520px){.grid{grid-template-columns:1fr}}
-    .pimg{height:140px;border-radius:14px;background:linear-gradient(135deg,#e6e9ff,#fff0f6);display:grid;place-items:center;font-size:38px}
-    .ptitle{font-weight:700;margin:10px 0 6px}
-    .price{font-weight:700}
-    .old{opacity:.6;text-decoration:line-through;margin-left:8px;font-weight:400}
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button,a.btn{
-      border:0;border-radius:12px;padding:11px 14px;cursor:pointer;font-weight:700;
-      text-decoration:none;display:inline-flex;align-items:center;gap:8px
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Toko Online</title>
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#121217;
+      --line:#24242a;
+      --text:#eaeaea;
+      --muted:#bdbdbd;
+      --btn:#191922;
+      --radius:16px;
     }
-    .primary{background:#25D366;color:#fff}
-    .secondary{background:#111;color:#fff}
-    .ghost{background:#f1f2f6}
-    .badge{display:inline-block;background:#fff3cd;color:#8a6d3b;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700}
-    .section{margin-top:14px}
-    .flex{display:flex;gap:12px;flex-wrap:wrap}
-    .small{font-size:13px;opacity:.85;line-height:1.45}
-    footer{padding:18px 0;color:#666;font-size:13px}
-    .note{padding:12px;border-radius:14px;background:#eef6ff}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-    input{padding:10px 12px;border-radius:12px;border:1px solid #e6e6e6;width:260px;max-width:100%}
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:system-ui,Arial,sans-serif; background:var(--bg); color:var(--text); }
+    .wrap{ max-width:980px; margin:0 auto; padding:18px; }
+
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+      padding:14px 0;
+    }
+    .brand{ display:flex; flex-direction:column; gap:4px; }
+    h1{ margin:0; font-size:18px; }
+    .sub{ margin:0; font-size:13px; color:var(--muted); }
+
+    .top-actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    input[type="search"]{
+      width:min(520px, 100%);
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#141419;
+      color:var(--text);
+      outline:none;
+    }
+    input[type="search"]::placeholder{ color:#8f8f95; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:var(--btn);
+      color:var(--text);
+      text-decoration:none;
+      cursor:pointer;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .btn:hover{ filter:brightness(1.08); }
+
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .thumb{
+      width:100%;
+      aspect-ratio: 4/3;
+      background:#0f0f14;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .content{ padding:14px; display:flex; flex-direction:column; gap:10px; }
+    .title{ font-weight:800; font-size:15px; }
+    .small{ font-size:13px; color:var(--muted); line-height:1.4; }
+
+    .floating-wa{
+      position:fixed; right:16px; bottom:16px;
+      width:56px; height:56px;
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      background:#1f8f4e;
+      color:#fff; text-decoration:none;
+      font-size:24px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      z-index:9999;
+    }
   </style>
 </head>
+
 <body>
-
-<header>
-  <div class="wrap topbar">
-    <div>
+  <div class="wrap">
+    <header>
       <div class="brand">
-        <div class="logo">TO</div>
-        <div>
-          <div style="font-weight:800;font-size:18px">Toko Online lilahsan</div>
-          <div class="sub">Order cepat via WhatsApp • Bisa COD (opsional)</div>
-        </div>
+        <h1>Toko Online</h1>
+        <p class="sub">Order via WhatsApp • © <span id="year"></span></p>
       </div>
-    </div>
-    <div>
-      <input id="search" placeholder="Cari produk..." oninput="render()">
-    </div>
+
+      <div class="top-actions">
+        <input id="search" type="search" placeholder="Cari produk..." autocomplete="off" />
+        <a id="waAdminTop" class="btn" target="_blank" rel="noopener">💬 WA Admin</a>
+      </div>
+    </header>
+
+    <div id="product-list" class="grid"></div>
   </div>
-</header>
 
-<main class="wrap hero">
-  <div class="card">
-    <div class="flex" style="align-items:center;justify-content:space-between">
-      <div>
-        <span class="badge">PROMO HARI INI</span>
-        <h1 style="margin:10px 0 6px">Produk best seller, harga aman</h1>
-        <div class="small">Klik produk → otomatis bikin format chat WhatsApp. Tinggal kirim.</div>
-      </div>
-      <a class="btn secondary" href="#produk">Lihat Produk ↓</a>
-    </div>
+  <a id="waAdminFloat" class="floating-wa" target="_blank" rel="noopener" aria-label="WhatsApp Admin">🟢</a>
 
-    <div class="section note">
-      <div style="font-weight:800;margin-bottom:6px">Info Pembayaran</div>
-      <div class="small">
-        Rekening: <b id="rek">DANA 085887443293 a/n TOKO LILAHSAN</b>
-      </div>
-      <div class="btnrow">
-        <button class="ghost" onclick="copyRek()">Copy Rekening</button>
-        <a class="btn primary" id="waBtn" target="_blank" rel="noopener">Chat Admin WhatsApp</a>
-      </div>
-      <div class="small" id="copystatus" style="margin-top:8px"></div>
-    </div>
+  <script>
+    // =========================
+    // 1) GANTI NOMOR WA DI SINI
+    // =========================
+    const WA_NUMBER = "6285887443293"; // contoh: 62812xxxxxxx (tanpa +, tanpa spasi)
 
-    <h2 id="produk" style="margin:18px 0 10px">Daftar Produk</h2>
-    <div class="grid" id="list"></div>
+    // =========================
+    // 2) EDIT PRODUK DI SINI
+    //    Pastikan file gambar ada di repo:
+    //    /img/produk1.jpg, dst
+    // =========================
+    const products = [
+      { img: "img/produk1.jpg", name: "kaka" },
+      { img: "img/produk2.jpg", name: "pocong premium" },
+      { img: "img/produk3.jpg", name: "nailong lucu" },
+      // tambah produk di sini:
+      // { img: "img/produk4.jpg", name: "nama produk" },
+    ];
 
-    <h2 style="margin:18px 0 10px">Testimoni</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="small">“Barangnya sesuai, pengiriman cepat. Recomended!”</div>
-        <div style="margin-top:8px;font-weight:700">— Rina</div>
-      </div>
-      <div class="card">
-        <div class="small">“Admin ramah banget, respon cepat.”</div>
-        <div style="margin-top:8px;font-weight:700">— Dimas</div>
-      </div>
-      <div class="card">
-        <div class="small">“Packaging aman, produk ori.”</div>
-        <div style="margin-top:8px;font-weight:700">— Sari</div>
-      </div>
-    </div>
+    // =========================
+    // UTIL
+    // =========================
+    function waLink(text){
+      return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+    }
 
-    <footer>
-      <div>© <span id="year"></span> Toko Online lilahsan• Dibuat dengan GitHub Pages</div>
-    </footer>
-  </div>
-</main>
-<div id="product-list"></div>
-<script>
-  // =========================
-  // 1) GANTI NOMOR WA DI SINI
-  // =========================
-  const WA_NUMBER = "6285887443293"; // pakai kode negara 62, tanpa +, tanpa spasi
+    function orderMessage(productName){
+      return [
+        "Halo Admin, saya mau order:",
+        "",
+        `- Produk: ${productName}`,
+        "- Jumlah: 1",
+        "- Nama:",
+        "- Alamat:",
+        "- Metode bayar: Transfer/COD",
+        "",
+        "Terima kasih"
+      ].join("\n");
+    }
 
-  // =========================
-  // 2) EDIT PRODUK DI SINI
-  // =========================
-  const products = [
-    { img: "img/produk1.jpg", name: "kaka" },
-    { img: "img/produk2.jpg", name: "pocong premium" },
-    { img: "img/produk3.jpg", name: "nailong lucu" },
-  ];
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
 
-  // =========================
-  // UTIL
-  // =========================
-  function waLink(text) {
-    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
-  }
+    // =========================
+    // RENDER
+    // =========================
+    function renderProducts(){
+      const container = document.getElementById("product-list");
+      const q = (document.getElementById("search").value || "").toLowerCase().trim();
+      container.innerHTML = "";
 
-  function orderMessage(productName) {
-    return [
-      "Halo Admin, saya mau order:",
-      "",
-      `- Produk: ${productName}`,
-      "- Jumlah: 1",
-      "- Nama:",
-      "- Alamat:",
-      "- Metode bayar: Transfer/COD",
-      "",
-      "Terima kasih"
-    ].join("\n");
-  }
+      const filtered = products.filter(p => (p.name || "").toLowerCase().includes(q));
 
-  function escapeHtml(str) {
-    return String(str)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
+      if(filtered.length === 0){
+        container.innerHTML = `
+          <div class="card">
+            <div class="content">
+              <div class="title">Produk tidak ditemukan</div>
+              <div class="small">Coba kata kunci lain.</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
 
-  // =========================
-  // RENDER PRODUK
-  // =========================
-  function renderProducts() {
-    const container = document.getElementById("product-list");
-    if (!container) return;
+      const frag = document.createDocumentFragment();
 
-    container.innerHTML = "";
+      filtered.forEach((p) => {
+        const name = p?.name ? String(p.name) : "-";
+        const img = p?.img ? String(p.img) : "";
+        const msg = orderMessage(name);
 
-    const frag = document.createDocumentFragment();
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="thumb">
+            ${img
+              ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" loading="lazy">`
+              : `<div class="small">Tidak ada foto</div>`
+            }
+          </div>
 
-    products.forEach((p) => {
-      const name = p?.name ? String(p.name) : "-";
-      const img = p?.img ? String(p.img) : "";
-      const msg = orderMessage(name);
+          <div class="content">
+            <div class="title">${escapeHtml(name)}</div>
+            <div class="small">Klik tombol di bawah untuk order via WhatsApp.</div>
+            <a class="btn" href="${waLink(msg)}" target="_blank" rel="noopener">🛍️ Order WA</a>
+          </div>
+        `;
 
-      const card = document.createElement("div");
-      card.style.margin = "20px";
-      card.style.textAlign = "center";
+        frag.appendChild(card);
+      });
 
-      card.innerHTML = `
-        ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" style="max-width:220px;width:100%;border-radius:12px;">` : ""}
-        <h3 style="margin:12px 0 10px;">${escapeHtml(name)}</h3>
-        <a href="${waLink(msg)}"
-           target="_blank" rel="noopener"
-           style="display:inline-block;padding:10px 14px;border-radius:12px;text-decoration:none;border:1px solid #2c2c33;">
-           Order via WhatsApp
-        </a>
-      `;
+      container.appendChild(frag);
+    }
 
-      frag.appendChild(card);
-    });
+    // =========================
+    // INIT
+    // =========================
+    document.getElementById("year").innerText = new Date().getFullYear();
 
-    container.appendChild(frag);
-  }
+    const adminText = "Halo Admin, saya mau tanya produk.";
+    document.getElementById("waAdminTop").href = waLink(adminText);
+    document.getElementById("waAdminFloat").href = waLink(adminText);
 
-  // =========================
-  // INIT
-  // =========================
-  renderProducts();
-</script>
+    document.getElementById("search").addEventListener("input", renderProducts);
+
+    renderProducts();
+  </script>
+</body>
+</html>
