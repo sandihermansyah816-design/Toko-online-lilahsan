@@ -125,112 +125,85 @@
   // =========================
   // 1) GANTI NOMOR WA DI SINI
   // =========================
-  const WA_NUMBER = "6285887443293"; // contoh: 62812xxxx (pakai kode negara 62)
+  const WA_NUMBER = "6285887443293"; // pakai kode negara 62, tanpa +, tanpa spasi
 
   // =========================
   // 2) EDIT PRODUK DI SINI
   // =========================
-const products = [
-  {
-    img: "img/produk1.jpg",
-    name: "kaka"
-  },
-  {
-    img: "img/produk2.jpg",
-    name: "pocong premium"
-  },
-  {
-    img: "img/produk3.jpg",
-    name: "nailong lucu"
-  }
-];
-const container = document.getElementById("product-list");
-container.innerHTML = "";
-products.forEach(product => {
-  container.innerHTML += `
-    <div style="margin:20px; text-align:center;">
-      <img src="${product.img}" width="150"><br>
-      <b>${product.name}</b>
-    </div>
-  `;
-});
-  function rupiah(n){
-    return new Intl.NumberFormat("id-ID").format(n);
-  }
-  document.body.insertAdjacentHTML(
-  "beforeend",
-  "<p style='color:green;font-weight:bold'>SCRIPT JALAN</p>"
-);
-</script>
-  function waLink(text){
+  const products = [
+    { img: "img/produk1.jpg", name: "kaka" },
+    { img: "img/produk2.jpg", name: "pocong premium" },
+    { img: "img/produk3.jpg", name: "nailong lucu" },
+  ];
+
+  // =========================
+  // UTIL
+  // =========================
+  function waLink(text) {
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
   }
 
-  function render(){
-    const q = (document.getElementById("search").value || "").toLowerCase();
-    const list = document.getElementById("list");
-    list.innerHTML = "";
+  function orderMessage(productName) {
+    return [
+      "Halo Admin, saya mau order:",
+      "",
+      `- Produk: ${productName}`,
+      "- Jumlah: 1",
+      "- Nama:",
+      "- Alamat:",
+      "- Metode bayar: Transfer/COD",
+      "",
+      "Terima kasih"
+    ].join("\n");
+  }
 
-    const filtered = products.filter(p => p.name.toLowerCase().includes(q));
+  function escapeHtml(str) {
+    return String(str)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
 
-    filtered.forEach((p, idx) => {
-      
-const msg = `
-Halo Admin, saya mau order:
-- Produk: ${p.name}
-- Harga: Rp${rupiah(p.price)}
-- Jumlah: 1
-- Nama:
-- Alamat:
-- Metode bayar: Transfer/COD
+  // =========================
+  // RENDER PRODUK
+  // =========================
+  function renderProducts() {
+    const container = document.getElementById("product-list");
+    if (!container) return;
 
-Terima kasih.
-`;
-      const el = document.createElement("div");
-      el.className = "card";
-      el.innerHTML = `
-        <div class="pimg">${p.emoji}</div>
-        <div class="ptitle">${p.name}</div>
-        <div class="small">Stok: <b>${p.stock}</b></div>
-        <div style="margin-top:8px">
-          <span class="price">Rp${rupiah(p.price)}</span>
-          <span class="old">Rp${rupiah(p.old)}</span>
-        </div>
-        <div class="btnrow">
-          <a class="btn primary" href="${waLink(msg)}" target="_blank" rel="noopener">Order via WA</a>
-          <button class="ghost" onclick="alert('Simpan dulu ya: ${p.name}')">Simpan</button>
-        </div>
+    container.innerHTML = "";
+
+    const frag = document.createDocumentFragment();
+
+    products.forEach((p) => {
+      const name = p?.name ? String(p.name) : "-";
+      const img = p?.img ? String(p.img) : "";
+      const msg = orderMessage(name);
+
+      const card = document.createElement("div");
+      card.style.margin = "20px";
+      card.style.textAlign = "center";
+
+      card.innerHTML = `
+        ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" style="max-width:220px;width:100%;border-radius:12px;">` : ""}
+        <h3 style="margin:12px 0 10px;">${escapeHtml(name)}</h3>
+        <a href="${waLink(msg)}"
+           target="_blank" rel="noopener"
+           style="display:inline-block;padding:10px 14px;border-radius:12px;text-decoration:none;border:1px solid #2c2c33;">
+           Order via WhatsApp
+        </a>
       `;
-      list.appendChild(el);
+
+      frag.appendChild(card);
     });
 
-    if(filtered.length === 0){
-      list.innerHTML = `<div class="small">Produk tidak ditemukan.</div>`;
-    }
+    container.appendChild(frag);
   }
 
-  function copyRek(){
-    const text = document.getElementById("rek").innerText;
-    navigator.clipboard.writeText(text).then(()=>{
-      document.getElementById("copystatus").innerText = "✅ Rekening berhasil dicopy.";
-      setTimeout(()=>document.getElementById("copystatus").innerText="", 2000);
-    }).catch(()=>{
-      document.getElementById("copystatus").innerText = "⚠️ Gagal copy. Tekan dan tahan untuk salin manual.";
-    });
-  }
-
-  // tombol chat admin
-  document.getElementById("waBtn").href = waLink("Halo Admin, saya mau tanya produk.");
-  document.getElementById("year").innerText = new Date().getFullYear();
-document.getElementById("waFloat").href = waLink("Halo Admin, saya mau order / tanya produk.");
-  render();
+  // =========================
+  // INIT
+  // =========================
+  renderProducts();
 </script>
-  <a class="floating-wa"
-   id="waFloat"
-   href="https://wa.me/6285887443293?text=Halo%20Admin%2C%20saya%20mau%20order%20%2F%20tanya%20produk."
-   target="_blank"
-   rel="noopener">
-  💬 <div><div>Chat WA</div><small>Fast respon</small></div>
-</a>
-</body>
-</html>
