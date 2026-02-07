@@ -340,7 +340,7 @@ card.innerHTML = `
     ${badge}
     ${
       img
-        ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}">`
+        ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" loading="lazy">`
         : `<div class="small">Tidak ada foto</div>`
     }
   </div>
@@ -348,24 +348,11 @@ card.innerHTML = `
   <div class="content">
     <div class="title">${escapeHtml(name)}</div>
     <div class="price">${price}</div>
-    <a class="btn" href="${waLink(msg)}" target="_blank" rel="noopener">
-      Order via WhatsApp
+    <a class="btn" href="${walink(msg)}" target="_blank" rel="noopener">
+      🛍️ Order via WhatsApp
     </a>
   </div>
 `;
-          <div class="thumb">
-            ${img
-              ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" loading="lazy">`
-              : `<div class="small">Tidak ada foto</div>`
-            }
-          </div>
-
-          <div class="content">
-            <div class="title">${escapeHtml(name)}</div>
-            <div class="small">Klik tombol di bawah untuk order via WhatsApp.</div>
-            <a class="btn" href="${waLink(msg)}" target="_blank" rel="noopener">🛍️ Order WA</a>
-          </div>
-        `;
 
         frag.appendChild(card);
       });
