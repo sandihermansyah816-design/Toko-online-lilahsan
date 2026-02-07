@@ -1,82 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Toko Online lilahsan</title>
-<link rel="icon" type="image/png" href="img/logo-lilahsan.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toko Online Lilahsan</title>
+
+  <!-- Font Awesome (ikon) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
     :root{
-      --bg:#0b0b0c;
-      --card:#121217;
-      --line:#24242a;
-      --text:#eaeaea;
-      --muted:#bdbdbd;
-      --btn:#191922;
-      --radius:16px;
+      --bg:#0b0b0f;
+      --card:#12121a;
+      --text:#f3f4f6;
+      --muted:rgba(243,244,246,.75);
+      --line:rgba(255,255,255,.10);
+      --btn:#1f2937;
+      --btn2:#22c55e;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
-    *{ box-sizing:border-box; }
-    body{ margin:0; font-family:system-ui,Arial,sans-serif; background:var(--bg); color:var(--text); }
-    .wrap{ max-width:980px; margin:0 auto; padding:18px; }
-
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:980px; margin:0 auto; padding:18px}
     header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap;
-      padding:14px 0;
+      padding:18px 0 10px;
     }
-    .brand{ display:flex; flex-direction:column; gap:4px; }
-    h1{ margin:0; font-size:18px; }
-    .sub{ margin:0; font-size:13px; color:var(--muted); }
-
-    .top-actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .topbar{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:260px;
+    }
+    .brand img{
+      width:52px; height:52px; border-radius:14px; object-fit:cover;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+    }
+    .brand h1{
+      margin:0;
+      font-size:22px;
+      line-height:1.1;
+      font-weight:800;
+    }
+    .brand .sub{
+      margin-top:6px;
+      font-size:13px;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .top-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex:1;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
     input[type="search"]{
-      width:min(520px, 100%);
+      width:min(420px, 100%);
       padding:12px 14px;
       border-radius:14px;
       border:1px solid var(--line);
-      background:#141419;
+      background:rgba(255,255,255,.04);
       color:var(--text);
       outline:none;
     }
-    input[type="search"]::placeholder{ color:#8f8f95; }
-
+    input[type="search"]::placeholder{color:rgba(243,244,246,.55)}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:8px;
-      padding:10px 12px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
       border-radius:14px;
       border:1px solid var(--line);
       background:var(--btn);
       color:var(--text);
-      text-decoration:none;
+      font-weight:800;
       cursor:pointer;
-      font-size:14px;
+      box-shadow:none;
+      transition:.15s;
       white-space:nowrap;
     }
-    .btn:hover{ filter:brightness(1.08); }
-
+    .btn:hover{transform:translateY(-1px)}
+    .btn-wa{
+      background:rgba(34,197,94,.15);
+      border-color:rgba(34,197,94,.35);
+    }
+    .section{
+      margin-top:18px;
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+      box-shadow:var(--shadow);
+    }
+    .section-title{
+      margin:0 0 12px;
+      font-size:26px;
+      letter-spacing:.2px;
+    }
     .grid{
-      margin-top:14px;
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap:12px;
     }
     .card{
-      background:var(--card);
       border:1px solid var(--line);
-      border-radius:var(--radius);
+      border-radius:18px;
       overflow:hidden;
-      display:flex;
-      flex-direction:column;
+      background:var(--card);
+      box-shadow: 0 8px 18px rgba(0,0,0,.25);
     }
     .thumb{
+      position:relative;
       width:100%;
-      aspect-ratio: 4/3;
-      background:#0f0f14;
-      display:flex; align-items:center; justify-content:center;
-      overflow:hidden;
+      aspect-ratio: 1 / 1;
+      background:rgba(255,255,255,.04);
+      display:grid;
+      place-items:center;
     }
     .thumb img{
       width:100%;
@@ -84,221 +138,230 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       object-fit:cover;
       display:block;
     }
-    .content{ padding:14px; display:flex; flex-direction:column; gap:10px; }
-    .title{ font-weight:800; font-size:15px; }
-    .small{ font-size:13px; color:var(--muted); line-height:1.4; }
-
-    .floating-wa{
-      position:fixed; right:16px; bottom:16px;
-      width:56px; height:56px;
-      border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      background:#1f8f4e;
-      color:#fff; text-decoration:none;
-      font-size:24px;
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
-      z-index:9999;
-    /* ===== FOOTER (LEBIH RAPI & PROFESIONAL) ===== */
-.footer{
-  margin-top: 44px;
-  border-top: 1px solid var(--line);
-  background: #0f0f12;
-}
-
-.footer-wrap{
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 22px 18px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 22px;
-}
-
-.footer h3{
-  margin: 0 0 10px;
-  font-size: 15px;
-  letter-spacing: .2px;
-}
-
-.footer p{
-  margin: 0;
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.7;
-  white-space: pre-line;
-  word-break: break-word;
-}
-
-.footer a{
-  color: #7cf0c2;
-  text-decoration: none;
-  border-bottom: 1px dashed rgba(124,240,194,.45);
-  padding-bottom: 1px;
-}
-.footer a:hover{
-  border-bottom-style: solid;
-}
-
-/* baris copyright */
-.footer-copy{
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  padding: 12px 18px;
-  border-top: 1px solid var(--line);
-}
-
-/* Supaya footer tidak ketutup tombol WA floating */
-body{ padding-bottom: 96px; }
-      /* ===== Tentang Kami ===== */
-.about {
-  margin-top: 48px;
-  padding: 24px 18px;
-  background: var(--card);
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-}
-
-.about h2 {
-  margin: 0 0 12px;
-  font-size: 18px;
-  letter-spacing: .5px;
-}
-
-.about p {
-  margin: 0 0 10px;
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--muted);
-}
+    .badge{
+      position:absolute;
+      top:10px; left:10px;
+      padding:5px 10px;
+      border-radius:999px;
+      background:var(--btn2);
+      color:#05120a;
+      font-size:12px;
+      font-weight:900;
+      box-shadow: 0 8px 18px rgba(0,0,0,.25);
+    }
+    .content{padding:12px}
+    .title{font-weight:900; margin-bottom:6px}
+    .price{color:var(--muted); font-weight:700; margin-bottom:10px}
+    .small{color:var(--muted); font-size:13px; font-weight:600}
+    .howto-steps{display:grid; gap:10px; margin-top:10px}
+    .step{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:12px; border:1px solid var(--line);
+      border-radius:16px; background:rgba(255,255,255,.03);
+    }
+    .step-num{
+      width:28px; height:28px; border-radius:10px;
+      display:grid; place-items:center;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      font-weight:900;
+    }
+    footer{
+      margin-top:18px;
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+      box-shadow:var(--shadow);
+    }
+    .footer-wrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+    @media (max-width:720px){
+      .footer-wrap{grid-template-columns:1fr}
+    }
+    .footer-contact{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      margin:10px 0;
+      color:var(--muted);
+      font-weight:650;
+    }
+    .footer-contact i{margin-top:2px}
+    .footer-copy{
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+      color:rgba(243,244,246,.7);
+      font-weight:700;
+      text-align:center;
+    }
+    .float-wa{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      width:56px;
+      height:56px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background:rgba(34,197,94,.18);
+      border:1px solid rgba(34,197,94,.40);
+      box-shadow: 0 14px 32px rgba(0,0,0,.35);
+      z-index:999;
+    }
+    .float-wa i{font-size:22px}
   </style>
 </head>
 
 <body>
   <div class="wrap">
     <header>
-      <div class="brand">
-        <div style="display:flex;align-items:center;gap:12px;">
-  <img src="img/logo-lilahsan.png"
-       alt="Logo Lilahsan"
-       style="width:44px;height:44px;border-radius:10px;object-fit:cover;">
-  <h1>Toko Online Lilahsan</h1>
-</div>
-        <p class="sub">Order via WhatsApp • © <span id="year"></span></p>
-      </div>
+      <div class="topbar">
+        <div class="brand">
+          <img src="./img/logo-lilahsan.png" alt="Logo Lilahsan" />
+          <div>
+            <h1>Toko Online Lilahsan</h1>
+            <div class="sub">Order via WhatsApp • © <span id="year"></span></div>
+          </div>
+        </div>
 
-      <div class="top-actions">
-        <input id="search" type="search" placeholder="Cari produk..." autocomplete="off" />
-        <a id="waAdminTop" class="btn" target="_blank" rel="noopener">💬 WA Admin</a>
+        <div class="top-actions">
+          <input id="search" type="search" placeholder="Cari produk..." />
+          <a id="waAdminTop" class="btn btn-wa" target="_blank" rel="noopener">
+            <i class="fa-regular fa-comment-dots"></i> WA Admin
+          </a>
+        </div>
       </div>
     </header>
 
-    <div id="product-list" class="grid"></div>
-    <section class="about">
-  <h2>Tentang Kami</h2>
-  <p>
-    <strong>Toko Online Lilahsan</strong> adalah toko online yang menyediakan berbagai produk pilihan
-    dengan kualitas terbaik dan harga terjangkau.
-  </p>
-  <p>
-    Kami melayani pemesanan via WhatsApp dengan respon cepat,
-    pengiriman terpercaya, dan pelayanan yang ramah.
-  </p>
-</section>
-    <section class="howto">
-  <h2>Cara Order</h2>
+    <!-- PRODUK -->
+    <section class="section">
+      <h2 class="section-title">Produk</h2>
+      <div id="product-list" class="grid"></div>
+    </section>
 
-  <div class="howto-steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text">Pilih produk yang kamu mau.</div>
-    </div>
+    <!-- ABOUT -->
+    <section class="section about">
+      <h2 class="section-title">Tentang Kami</h2>
+      <p class="small">
+        <strong>Toko Online Lilahsan</strong> adalah toko online yang menyediakan berbagai produk pilihan dengan kualitas terbaik dan harga terjangkau.
+      </p>
+      <p class="small">
+        Kami melayani pemesanan via WhatsApp dengan respon cepat, pengiriman terpercaya, dan pelayanan yang ramah.
+      </p>
+    </section>
 
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text">Klik tombol <b>Order via WhatsApp</b> untuk lanjut ke chat WhatsApp.</div>
-    </div>
+    <!-- HOW TO -->
+    <section class="section howto">
+      <h2 class="section-title">Cara Order</h2>
+      <div class="howto-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">Pilih produk yang kamu mau.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">Klik tombol <b>Order via WhatsApp</b> untuk lanjut ke chat WhatsApp.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">Tulis alamat & jumlah pesanan, lalu kirim.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text">Admin konfirmasi stok, ongkir, dan total bayar.</div>
+        </div>
+        <div class="small">ℹ️ Tips: Pastikan nomor WhatsApp aktif & alamat lengkap biar cepat diproses.</div>
+      </div>
+    </section>
 
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text">Tulis alamat & jumlah pesanan, lalu kirim.</div>
-    </div>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-wrap">
+        <div>
+          <h3>Toko Online Lilahsan</h3>
+          <p class="footer-contact">
+            <i class="fa-solid fa-location-dot"></i>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Jl.+Benda+Raya+No.+11823+Jakarta"
+              target="_blank"
+              rel="noopener"
+            >
+              Jl. Benda Raya No. 11823<br>
+              DKI Jakarta, Kec. Kalideres, Kel. Kamal
+            </a>
+          </p>
 
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-text">Admin konfirmasi stok, ongkir, dan total bayar.</div>
-    </div>
+          <p class="footer-contact">
+            <i class="fa-solid fa-clock"></i>
+            Jam Operasional:<br>
+            Senin – Sabtu: 09.00 – 21.00<br>
+            Minggu: Libur
+          </p>
+        </div>
+
+        <div>
+          <h3>Kontak</h3>
+          <p class="footer-contact">
+            <i class="fa-brands fa-whatsapp"></i>
+            <a id="waFooter" target="_blank" rel="noopener">0858-5874-43293</a>
+          </p>
+
+          <p class="footer-contact">
+            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:sandihermasnyah816@gmail.com">
+              sandihermasnyah816@gmail.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-copy">
+        © <span id="yearFooter"></span> Toko Online Lilahsan
+      </div>
+    </footer>
   </div>
 
-  <div class="howto-note">
-    <i class="fa-solid fa-circle-info"></i>
-    Tips: Pastikan nomor WhatsApp aktif & alamat lengkap biar cepat diproses.
-  </div>
-</section>
-  </div>
-
-  <a id="waAdminFloat" class="floating-wa" target="_blank" rel="noopener" aria-label="WhatsApp Admin">🟢</a>
+  <!-- Floating WA -->
+  <a id="waAdminFloat" class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp Admin">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
   <script>
     // =========================
-    // 1) GANTI NOMOR WA DI SINI
+    // CONFIG
     // =========================
-    const WA_NUMBER = "6285887443293"; // contoh: 62812xxxxxxx (tanpa +, tanpa spasi)
+    const WA_NUMBER = "62858587443293"; // ganti kalau perlu (format: 62xxxxxxxxxxx)
 
-    // =========================
-    // 2) EDIT PRODUK DI SINI
-    //    Pastikan file gambar ada di repo:
-    //    /img/produk1.jpg, dst
-    // =========================
     const products = [
-  {
-    img: "./img/produk1.jpg",
-    name: "Pocong Premium",
-    price: 25000,
-    badge: "Best Seller"
-  },
-  {
-    img: "./img/produk2.jpg",
-    name: "Kaka",
-    price: 20000,
-    badge: "Promo"
-  },
-  {
-    img: "./img/produk3.jpg",
-    name: "Nailong Lucu",
-    price: 30000,
-    badge: "Ready"
-  }
-];
+      { img: "./img/produk1.jpg", name: "Pocong Premium", price: 25000, badge: "Best Seller" },
+      { img: "./img/produk2.jpg", name: "Kaka",          price: 20000, badge: "Promo" },
+      { img: "./img/produk3.jpg", name: "Nailong Lucu",  price: 30000, badge: "Ready" },
+    ];
 
     // =========================
     // UTIL
     // =========================
-    function waLink(text){
-      return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
-    }
-
-    function orderMessage(productName){
-      return [
-        "Halo Admin lilahsan, saya mau order:",
-        "",
-        `- Produk: ${productName}`,
-        "- Jumlah: 1",
-        "- Nama:",
-        "- Alamat:",
-        "- Metode bayar: Transfer/COD",
-        "",
-        "Terima kasih"
-      ].join("\n");
-    }
-
-    function escapeHtml(str){
-      return String(str)
+    function escapeHtml(s){
+      return String(s ?? "")
         .replaceAll("&","&amp;")
         .replaceAll("<","&lt;")
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+        .replaceAll("'","&#39;");
+    }
+
+    function walink(text){
+      const t = encodeURIComponent(String(text ?? ""));
+      return `https://wa.me/${WA_NUMBER}?text=${t}`;
+    }
+
+    function orderMessage(productName){
+      return `Halo Admin Toko Online Lilahsan, saya mau order produk: ${productName}.`;
     }
 
     // =========================
@@ -307,6 +370,8 @@ body{ padding-bottom: 96px; }
     function renderProducts(){
       const container = document.getElementById("product-list");
       const q = (document.getElementById("search").value || "").toLowerCase().trim();
+      if(!container) return;
+
       container.innerHTML = "";
 
       const filtered = products.filter(p => (p.name || "").toLowerCase().includes(q));
@@ -326,37 +391,40 @@ body{ padding-bottom: 96px; }
       const frag = document.createDocumentFragment();
 
       filtered.forEach((p) => {
-        const name = p?.name ? String(p.name) : "-";
-        const img = p?.img ? String(p.img) : "";
-        const msg = orderMessage(name);
+        const name  = p?.name ? String(p.name) : "-";
+        const img   = p?.img  ? String(p.img)  : "";
+        const msg   = orderMessage(name);
 
         const card = document.createElement("div");
-card.className = "card";
+        card.className = "card";
 
-const price = (p?.price !== undefined && p?.price !== null)
-  ? `Rp ${Number(p.price).toLocaleString("id-ID")}`
-  : "";
+        const price = (p?.price !== undefined && p?.price !== null)
+          ? `Rp ${Number(p.price).toLocaleString("id-ID")}`
+          : "";
 
-const badge = p?.badge ? `<span class="badge">${escapeHtml(p.badge)}</span>` : "";
+        const badge = p?.badge
+          ? `<span class="badge">${escapeHtml(p.badge)}</span>`
+          : "";
 
-card.innerHTML = `
-  <div class="thumb">
-    ${badge}
-    ${
-      img
-        ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" loading="lazy">`
-        : `<div class="small">Tidak ada foto</div>`
-    }
-  </div>
+        card.innerHTML = `
+          <div class="thumb">
+            ${badge}
+            ${
+              img
+                ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" loading="lazy">`
+                : `<div class="small">Tidak ada foto</div>`
+            }
+          </div>
 
-  <div class="content">
-    <div class="title">${escapeHtml(name)}</div>
-    <div class="price">${price}</div>
-    <a class="btn" href="${walink(msg)}" target="_blank" rel="noopener">
-      🛍️ Order via WhatsApp
-    </a>
-  </div>
-`;
+          <div class="content">
+            <div class="title">${escapeHtml(name)}</div>
+            <div class="price">${escapeHtml(price)}</div>
+            <a class="btn btn-wa" href="${walink(msg)}" target="_blank" rel="noopener">
+              🛍️ Order via WhatsApp
+            </a>
+          </div>
+        `;
+
         frag.appendChild(card);
       });
 
@@ -366,65 +434,18 @@ card.innerHTML = `
     // =========================
     // INIT
     // =========================
-    document.getElementById("year").innerText = new Date().getFullYear();
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("year").innerText = new Date().getFullYear();
+      document.getElementById("yearFooter").innerText = new Date().getFullYear();
 
-    const adminText = "Halo Admin toko online lilahsan, saya mau tanya produk.";
-    document.getElementById("waAdminTop").href = waLink(adminText);
-    document.getElementById("waAdminFloat").href = waLink(adminText);
+      const adminText = "Halo Admin Toko Online Lilahsan, saya mau tanya produk.";
+      document.getElementById("waAdminTop").href = walink(adminText);
+      document.getElementById("waAdminFloat").href = walink(adminText);
+      document.getElementById("waFooter").href = walink(adminText);
 
-    document.getElementById("search").addEventListener("input", renderProducts);
-
-    renderProducts();
-    document.getElementById("yearFooter").innerText = new Date().getFullYear();
-document.getElementById("waFooter").href =
-  waLink("Halo Admin Toko Online Lilahsan, saya mau tanya produk.");
+      document.getElementById("search").addEventListener("input", renderProducts);
+      renderProducts();
+    });
   </script>
-  <footer class="footer">
-    <div class="footer-wrap">
-      <div>
-  <h3>Toko Online Lilahsan</h3>
-
-  <p class="footer-contact">
-    <i class="fa-solid fa-location-dot"></i>
-    <a
-      href="https://www.google.com/maps/search/?api=1&query=Jl.+Benda+Raya+No.+11823+Jakarta"
-      target="_blank"
-      rel="noopener"
-    >
-      Jl. Benda Raya No. 11823<br>
-      DKI Jakarta, Kec. Kalideres, Kel. Kamal
-    </a>
-  </p>
-</div>
-<div>
-  <p class="footer-contact">
-  <i class="fa-solid fa-clock"></i>
-  Jam Operasional:<br>
-  Senin – Sabtu: 09.00 – 21.00<br>
-  Minggu: Libur
-</p>
-  <h3>Kontak</h3>
-
-  <p class="footer-contact">
-    <i class="fa-brands fa-whatsapp"></i>
-    <a id="waFooter" target="_blank" rel="noopener">
-      0858-5874-43293
-    </a>
-  </p>
-
-  <p class="footer-contact">
-    <i class="fa-solid fa-envelope"></i>
-    <a href="mailto:sandihermasnyah816@gmail.com">
-      sandihermasnyah816@gmail.com
-    </a>
-  </p>
-</div>
-      
-    </div>
-
-    <div class="footer-copy">
-      © <span id="yearFooter"></span> Toko Online Lilahsan
-    </div>
-  </footer>
 </body>
 </html>
