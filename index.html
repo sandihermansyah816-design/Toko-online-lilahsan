@@ -156,10 +156,11 @@ products.forEach(product => {
     </div>
   `;
 });
-</script>
   function rupiah(n){
     return new Intl.NumberFormat("id-ID").format(n);
   }
+</script>
+  
 
   function waLink(text){
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
