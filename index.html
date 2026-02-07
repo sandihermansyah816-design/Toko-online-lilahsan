@@ -132,18 +132,29 @@
   // =========================
   const products = [
   <script>
-const container = document.getElementById("product-list");
+const products = [
+  {
+    img: "img/produk1.jpg",
+    name: "kaka"
+  },
+  {
+    img: "img/produk2.jpg",
+    name: "pocong premium"
+  },
+  {
+    img: "img/produk3.jpg",
+    name: "nailong lucu"
+  }
+];
 
-// PENTING: bersihkan dulu
+const container = document.getElementById("product-list");
 container.innerHTML = "";
 
 products.forEach(product => {
   container.innerHTML += `
-    <div style="border:1px solid #ccc; padding:10px; margin:10px">
+    <div style="margin:20px; text-align:center;">
       <img src="${product.img}" width="150"><br>
-      <b>${product.emoji} ${product.name}</b><br>
-      <span>Harga: Rp ${product.price}</span><br>
-      <small>Stok: ${product.stock}</small>
+      <b>${product.name}</b>
     </div>
   `;
 });
